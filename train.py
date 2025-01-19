@@ -77,6 +77,7 @@ class DistributedTrainer:
     
     def train(self, episodes=50):
         for episode_i in range(episodes):
+            print(f'Episode {episode_i}')
             self.train_result.append(self.algo.train())
             checkpoint_dir = os.path.abspath('./ckpt')
             save_result = self.algo.save(checkpoint_dir)
