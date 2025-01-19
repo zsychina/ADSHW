@@ -23,10 +23,10 @@ for env in targets.keys():
         trainer = DistributedTrainer(
             env_name=env,
             algo_name=algorithm,
-            workers_num=5
+            workers_num=10
         )
         
-        trainer.train(episodes=100)
+        trainer.train(episodes=50)
         
         # trainer.algo.save(f'./ckpt/{target["env_name"]}')
         
@@ -39,7 +39,7 @@ for env in targets.keys():
         ray.shutdown() 
 
 
-    plt.xlabel('Episodes')
+    plt.xlabel('Iteration')
     plt.ylabel('Return')
     plt.legend(legends)
     plt.savefig(f'./assets/{env}.png')

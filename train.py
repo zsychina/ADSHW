@@ -126,7 +126,11 @@ class DistributedTrainer:
     def episode_return_mean(self):
         ep_return_mean = []
         for result in self.train_result:
-            ep_return_mean.append(result['env_runners']['episode_return_mean'])
+            try:
+                ep_return_mean.append(result['env_runners']['episode_return_mean'])
+            except KeyError:
+                pass    
+                
         return ep_return_mean
 
 

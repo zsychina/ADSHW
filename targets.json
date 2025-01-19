@@ -1,8 +1,8 @@
 {
-    "CartPole-v1": [
-            "PPO", "DQN", "IMPALA", "APPO"
-    ],
     "LunarLander-v3": [
             "PPO", "DQN", "IMPALA", "APPO"
+    ],
+    "CartPole-v1": [
+        "PPO", "DQN", "IMPALA", "APPO"
     ]
 }
