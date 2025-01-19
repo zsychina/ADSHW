@@ -1,13 +1,8 @@
 {
-    "trains": [
-        {
-            "environment": "CartPole-v1",
-            "algorithm": "PPO"
-        },
-        {
-            "environment": "CartPole-v1",
-            "algorithm": "DQN"
-        }
+    "CartPole-v1": [
+            "PPO", "DQN", "IMPALA", "APPO"
+    ],
+    "LunarLander-v3": [
+            "PPO", "DQN", "IMPALA", "APPO"
     ]
-
 }

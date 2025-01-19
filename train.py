@@ -5,6 +5,8 @@ from ray.tune.registry import register_env
 
 from ray.rllib.algorithms.ppo import PPOConfig
 from ray.rllib.algorithms.dqn import DQNConfig
+from ray.rllib.algorithms.impala import IMPALAConfig
+from ray.rllib.algorithms.appo import APPOConfig
 
 import gymnasium as gym
 
@@ -44,6 +46,25 @@ class DistributedTrainer:
                 })
                 .env_runners(num_env_runners=self.workers_num)
             )
+            
+        elif self.algo_name == 'IMPALA':
+            self.config = (
+                IMPALAConfig()
+                .environment(env='my' + self.env_name)
+                .env_runners(num_env_runners=self.workers_num)
+                .training(lr=0.0003, train_batch_size_per_learner=512)
+                .learners(num_learners=1)
+            )
+            
+        elif self.algo_name == 'APPO':
+            self.config = (
+                APPOConfig()
+                .training(lr=0.01, grad_clip=30.0, train_batch_size_per_learner=50)
+                .environment(env='my' + self.env_name)
+                .env_runners(num_env_runners=self.workers_num)
+                .learners(num_learners=1)
+            )
+        
 
         if self.config is None:
             raise ValueError('Invalid algorithm name')
