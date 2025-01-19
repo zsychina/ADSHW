@@ -1,0 +1,13 @@
+{
+    "trains": [
+        {
+            "environment": "CartPole-v1",
+            "algorithm": "PPO"
+        },
+        {
+            "environment": "CartPole-v1",
+            "algorithm": "DQN"
+        }
+    ]
+
+}
