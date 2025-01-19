@@ -13,5 +13,6 @@ print(targets['trains'])
 
 
 
-
+for target in targets['trains']:
+    pass
 

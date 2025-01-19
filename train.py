@@ -1,3 +1,5 @@
+import os
+
 import ray
 from ray.tune.registry import register_env
 
@@ -43,20 +45,23 @@ class DistributedTrainer:
                 .env_runners(num_env_runners=self.workers_num)
             )
 
-
-
         if self.config is None:
             raise ValueError('Invalid algorithm name')
         
+        self.algo = self.config.build()
 
     def env_creator(self, env_config):
         return gym.make(self.env_name)
 
     
     def train(self, episodes=50):
-        algo = self.config.build()
         for episode_i in range(episodes):
-            self.train_result.append(algo.train())
+            self.train_result.append(self.algo.train())
+            checkpoint_dir = os.path.abspath('./ckpt')
+            save_result = self.algo.save(checkpoint_dir)
+            path_to_checkpoint = save_result.checkpoint.path
+            print(f'{path_to_checkpoint=}')
+            
             self.nodes, self.actors = self.check_worker_status()
             self.handle_worker_failure(self.nodes, self.actors)
         
@@ -109,8 +114,7 @@ if __name__=='__main__':
                                  algo_name='PPO', 
                                  workers_num=3)
     
-    trainer.train(episodes=50)
-
+    trainer.train(episodes=5)
 
     # 确保以上执行完毕
     

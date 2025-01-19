@@ -5,6 +5,7 @@ Distributed RL System based on ray.rllib
 ## Install
 
 ```bash
+mkdir ckpt
 conda create --name ray --file requirements.txt
 ```
 
